@@ -1,0 +1,3 @@
+Exposed rebar
+Crack
+Spalling

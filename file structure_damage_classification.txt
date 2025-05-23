@@ -1,0 +1,17 @@
+Damage_classification
+├── beam_damage/
+│   ├── Class A/
+│   ├── Class B/
+│   └── Class C/
+│   
+├── column_damage/
+│   ├── Class A/
+│   ├── Class B/
+│   └── Class C/
+│ 
+└── wall_damage/
+    ├── Class A/
+    ├── Class B/
+    └── Class C/
+
+

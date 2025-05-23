@@ -1,0 +1,32 @@
+crack_classification
+├── original/
+│   ├── beam/
+│   │   ├── Diagonal/
+│   │   ├── Vertical/
+│   │   └── Web/
+│   │ 
+│   ├── column/
+│   │   ├── Diagonal
+│   │   ├── Horizontal
+│   │   ├── Horizontal_large
+│   │   ├── Vertical
+│   │   ├── Vertical_large
+│   │   ├── Web
+│   │   └──  X-shape
+│   │ 
+│   └── wall/
+│       ├── Diagonal
+│       ├── Diagonal_large
+│       ├── Horizontal
+│       ├── Horizontal_large
+│       ├── spalling-like_cracks
+│       ├── Vertical
+│       ├── Vertical_large
+│       ├── Web
+│       ├── Web_large
+│       └── X-shape
+│   
+└── resized/
+    ├── ...
+
+

@@ -1,0 +1,9 @@
+path: C:\Users\almon\Desktop\DLCV\Final_Comp\damage_detection\3class\for_training\datasets_3class_full_shuffled
+train: train/images
+val: val/images
+test: test/images
+
+names:
+  0: Exposed rebar
+  1: Crack
+  2: Spalling

@@ -1,0 +1,7 @@
+web: if a column shows web like crack, it has high probability that is in sever damage.
+Vertical large: column are sensitive to Vertical crack, any crack that is long or a little bit wide/deep should go in this class
+vertical: those very small or tiny(slam) crack
+Horizontal large: column are not sensitive to Horizontal crack, so the crack belong to this class if it's extremally large
+Horizontal: all other normal horizontal cracks
+Diagonal: column are sensitive to diagonal cracks, any diagonal cracks should result in a A class
+To prevent wrong detection on horizontal from diagonal crack, it is important to make sure no ambiguous on "perfectly horizontal" and slight diagonal.  

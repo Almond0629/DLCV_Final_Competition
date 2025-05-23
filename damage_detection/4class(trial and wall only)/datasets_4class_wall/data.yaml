@@ -1,0 +1,6 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['Expose of rebar', 'Minor-crack','Major-Crack', 'Spalling']

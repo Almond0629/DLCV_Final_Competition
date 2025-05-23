@@ -1,0 +1,25 @@
+Damage_detection (3 class: rebar, crack, spalling)
+├── for_tool/
+│   ├── datasets_3class_beam/
+│   │   ├── image1.jpg
+│   │   ├── image1.txt
+│   │   ├── image2.jpg
+│   │   ├── image2.txt
+│   │   ├── ...
+│   ├── datasets_3class_column/
+│   ├── datasets_3class_wall/
+│   └── datasets_3class_full/
+│   
+├── for_training/
+│   ├── datasets_3class_beam_shuffled/
+│   │   ├── test/
+│   │   │   ├── images/
+│   │   │   ├── labels/
+│   │   ├── train/
+│   │   └── val/
+│   ├── datasets_3class_column_shuffled/
+│   ├── datasets_3class_wall_shuffled/
+│   └── datasets_3class_full_shuffled/
+│
+└── labelList.txt
+
