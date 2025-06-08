@@ -3,4 +3,5 @@
 *.jpeg
 *.png
 *.zip
+*.pth
 labelTool/
