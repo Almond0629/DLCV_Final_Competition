@@ -21,18 +21,18 @@ crack_type_model.fc = nn.Sequential(
     nn.Linear(crack_type_model.fc.in_features, len(crack_type_classes)),
     nn.Sigmoid()
 )
-# Crack Size Classification
-crack_size_classes = ['Big', 'Small']
-crack_size_model = torchvision.models.shufflenet_v2_x1_5(weights='IMAGENET1K_V1')
-crack_size_model.fc = nn.Sequential(
-    nn.Linear(crack_size_model.fc.in_features, len(crack_size_classes)),
-    nn.Sigmoid()
-)
+# # Crack Size Classification
+# crack_size_classes = ['Big', 'Small']
+# crack_size_model = torchvision.models.shufflenet_v2_x1_5(weights='IMAGENET1K_V1')
+# crack_size_model.fc = nn.Sequential(
+#     nn.Linear(crack_size_model.fc.in_features, len(crack_size_classes)),
+#     nn.Sigmoid()
+# )
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-crack_type_model.load_state_dict(torch.load('./crack_classification/full/full_crack_type_best_model.pth', map_location=device))
-crack_size_model.load_state_dict(torch.load('./crack_classification/full/full_crack_size_best_model.pth', map_location=device))
+crack_type_model.load_state_dict(torch.load('./crack_classification/full/model.pth', map_location=device))
+# crack_size_model.load_state_dict(torch.load('./crack_classification/full/full_crack_size_best_model.pth', map_location=device))
 crack_type_model.to(device).eval()
-crack_size_model.to(device).eval()
+# crack_size_model.to(device).eval()
 
 # Image transform
 imagenet_stats = [(0.485, 0.456, 0.406), (0.229, 0.224, 0.225)]
@@ -43,13 +43,10 @@ transform = transforms.Compose([
 ])
 # Criteria mapping based on type & size
 crack_criteria = {
-    ('Diagonal', 'Big'): 4,
-    ('Diagonal', 'Small'): 5,
-    ('Horizontal', 'Big'): 8,
-    ('Horizontal', 'Small'): 9,
-    ('Vertical', 'Big'): 6,
-    ('Vertical', 'Small'): 7,
-    ('Web_and_X', None): 3
+    'Diagonal': 4,
+    'Horizontal': 8,
+    'Vertical': 6,
+    'Web_and_X': 3
 }
 criteria_map = {
     18: [0, 2],
@@ -66,8 +63,8 @@ def combine_detection_classification_results(detections, crack_class_pairs):
     if len(detections) == 0:
         criteria_set.add(1)
 
-    for crack_type, crack_size in crack_class_pairs:
-        key = (crack_type, crack_size) if crack_type != 'Web_and_X' else ('Web_and_X', None)
+    for crack_type in crack_class_pairs:
+        key = crack_type
         if key in crack_criteria:
             criteria_set.add(crack_criteria[key])
 
@@ -113,14 +110,14 @@ for i, result in enumerate(results):
                 type_pred = type_output.argmax(dim=1).item()
                 crack_type = crack_type_classes[type_pred]
 
-                crack_size = None
-                if crack_type in ['Diagonal', 'Horizontal', 'Vertical']:
-                    # Size prediction
-                    size_output = crack_size_model(image_tensor)
-                    size_pred = size_output.argmax(dim=1).item()
-                    crack_size = crack_size_classes[size_pred]
+                # crack_size = None
+                # if crack_type in ['Diagonal', 'Horizontal', 'Vertical']:
+                #     # Size prediction
+                #     size_output = crack_size_model(image_tensor)
+                #     size_pred = size_output.argmax(dim=1).item()
+                #     crack_size = crack_size_classes[size_pred]
 
-                detected_crack_pairs.append((crack_type, crack_size))
+                detected_crack_pairs.append(crack_type)
 
     damage_class, criteria = combine_detection_classification_results(labels, detected_crack_pairs)
     class_str = ','.join(map(str, [damage_class] + criteria))
